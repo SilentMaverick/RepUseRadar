@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Explorer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .glow-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at var(--x, 0) var(--y, 0),
+                rgba(255, 255, 255, 0.1) 0%,
+                transparent 50%
+            );
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .glow-effect:hover::before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen">
+    <!-- Background Container -->
+    <div id="meteorsContainer"></div>
+
+    <div id="app" class="relative z-10 min-h-screen flex flex-col">
+        <nav class="bg-white/5 backdrop-blur-sm border-b border-white/10">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center py-4">
+                    <a href="index.html" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">GitHub Explorer</a>
+                    <div class="space-x-4">
+                        <a href="repositories.html" class="text-white/60 hover:text-white transition-colors">Repositories</a>
+                        <a href="users.html" class="text-white/60 hover:text-white transition-colors">Users</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="flex-1">
+            <div class="container mx-auto px-4 py-16">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="text-6xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                        GitHub Explorer
+                    </h1>
+                    <p class="text-xl text-white/80 mb-4">
+                        Discover amazing repositories and connect with talented developers from around the world
+                    </p>
+                    <div class="flex items-center justify-center mb-12">
+                        <a href="https://github.com/SilentMaverick" target="_blank" 
+                           class="group glass-card rounded-xl p-4 hover:border-blue-500/50 transition-all duration-300">
+                            <div class="flex items-center space-x-3">
+                                <img src="https://github.com/SilentMaverick.png" 
+                                     alt="@SilentMaverick" 
+                                     class="w-12 h-12 rounded-full ring-2 ring-white/20 group-hover:ring-blue-500/50 transition-all duration-300" />
+                                <div class="text-left">
+                                    <div class="text-white font-medium group-hover:text-blue-400 transition-colors">@SilentMaverick</div>
+                                    <div class="text-white/60 text-sm">Project Creator</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Repository Card -->
+                        <a href="repositories.html" class="group">
+                            <div class="glass-card glow-effect rounded-xl p-8 text-center">
+                                <div class="relative w-20 h-20 mx-auto mb-6">
+                                    <div class="absolute inset-0 bg-blue-500 rounded-full opacity-20 blur-xl group-hover:opacity-30 transition-opacity"></div>
+                                    <svg class="w-20 h-20 relative text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                                    </svg>
+                                </div>
+                                <h2 class="text-2xl font-bold mb-4">Repositories</h2>
+                                <p class="text-white/60">Search and explore open source projects, trending repositories, and more</p>
+                            </div>
+                        </a>
+
+                        <!-- Users Card -->
+                        <a href="users.html" class="group">
+                            <div class="glass-card glow-effect rounded-xl p-8 text-center">
+                                <div class="relative w-20 h-20 mx-auto mb-6">
+                                    <div class="absolute inset-0 bg-purple-500 rounded-full opacity-20 blur-xl group-hover:opacity-30 transition-opacity"></div>
+                                    <svg class="w-20 h-20 relative text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </div>
+                                <h2 class="text-2xl font-bold mb-4">Users</h2>
+                                <p class="text-white/60">Find and connect with developers, view top contributors, and explore profiles</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Token Input Section -->
+                    <div class="mt-12 glass-card rounded-lg p-6 text-left">
+                        <h3 class="text-xl font-semibold mb-4">GitHub API Token</h3>
+                        <p class="text-white/60 mb-4">Add your GitHub personal access token to increase API rate limits and access more features.</p>
+                        <div class="flex gap-4">
+                            <input type="password" id="tokenInput" placeholder="Enter your GitHub token" 
+                                class="flex-1 bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-black placeholder-white/30">
+                            <button id="saveToken" class="px-6 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">
+                                Save Token
+                            </button>
+                        </div>
+                        <div id="tokenStatus" class="mt-2 text-sm"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer mt-auto py-8 bg-white/5 backdrop-blur-sm border-t border-white/10">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center text-white/60">
+                    <p>GitHub Explorer &copy; 2024</p>
+                    <p class="mt-2">Search and discover amazing open source projects and developers</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="components/ui/meteors.js"></script>
+    <script src="config.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initMeteors === 'function') {
+                initMeteors();
+            }
+
+            // Handle glow effect
+            document.querySelectorAll('.glow-effect').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    card.style.setProperty('--x', `${x}px`);
+                    card.style.setProperty('--y', `${y}px`);
+                });
+            });
+
+            // Handle token saving
+            const tokenInput = document.getElementById('tokenInput');
+            const saveToken = document.getElementById('saveToken');
+            const tokenStatus = document.getElementById('tokenStatus');
+
+            // Function to update token status
+            const updateTokenStatus = () => {
+                const token = localStorage.getItem('github_token');
+                if (token) {
+                    tokenStatus.textContent = '✓ Token is set';
+                    tokenStatus.className = 'mt-2 text-sm text-green-400';
+                } else {
+                    tokenStatus.textContent = 'ℹ No token set';
+                    tokenStatus.className = 'mt-2 text-sm text-white/60';
+                }
+            };
+
+            // Load existing token
+            const existingToken = localStorage.getItem('github_token');
+            if (existingToken) {
+                tokenInput.value = existingToken;
+            }
+            updateTokenStatus();
+
+            saveToken.addEventListener('click', () => {
+                const token = tokenInput.value.trim();
+                if (token) {
+                    localStorage.setItem('github_token', token);
+                    tokenStatus.textContent = '✓ Token saved successfully!';
+                    tokenStatus.className = 'mt-2 text-sm text-green-400';
+                    setTimeout(updateTokenStatus, 2000);
+                } else {
+                    localStorage.removeItem('github_token');
+                    tokenStatus.textContent = 'ℹ Token removed';
+                    tokenStatus.className = 'mt-2 text-sm text-white/60';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

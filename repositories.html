@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Explorer - Repositories</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-black text-white min-h-screen">
+    <!-- Background Container -->
+    <div id="meteorsContainer"></div>
+
+    <div id="app" class="relative z-10 min-h-screen flex flex-col">
+        <nav class="bg-white/5 backdrop-blur-sm border-b border-white/10">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center py-4">
+                    <a href="index.html" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">GitHub Explorer</a>
+                    <div class="space-x-4">
+                        <a href="repositories.html" class="text-white font-medium border-b-2 border-blue-500">Repositories</a>
+                        <a href="users.html" class="text-white/60 hover:text-white transition-colors">Users</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <main class="flex-1">
+            <div class="container mx-auto px-4 py-8">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-4xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                        Search Repositories
+                    </h1>
+                    
+                    <!-- Search Section -->
+                    <div class="search-container backdrop-blur-sm bg-white/5 p-6">
+                        <form id="searchForm" class="space-y-6">
+                            <div class="relative">
+                                <input type="text" id="searchInput" 
+                                    class="search-input w-full pl-10 pr-4 py-3 rounded-lg bg-black/50 border border-white/10"
+                                    placeholder="Search repositories...">
+                                <svg class="w-6 h-6 text-gray-400 absolute left-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <select id="languageFilter" class="bg-black/50 border border-white/10 text-white rounded-lg px-4 py-2">
+                                    <option value="">Any Language</option>
+                                    <option value="javascript">JavaScript</option>
+                                    <option value="python">Python</option>
+                                    <option value="java">Java</option>
+                                    <option value="typescript">TypeScript</option>
+                                    <option value="cpp">C++</option>
+                                    <option value="go">Go</option>
+                                    <option value="rust">Rust</option>
+                                </select>
+
+                                <select id="sortFilter" class="bg-black/50 border border-white/10 text-white rounded-lg px-4 py-2">
+                                    <option value="stars">Sort by Stars</option>
+                                    <option value="forks">Sort by Forks</option>
+                                    <option value="updated">Sort by Updated</option>
+                                </select>
+
+                                <button type="submit" class="btn-primary px-6 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300" data-glow>
+                                    Search
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Trending Repositories -->
+                    <div class="mt-12 trending-section">
+                        <h2 class="text-2xl font-bold mb-4 text-white">Trending Repositories</h2>
+                        <div id="trendingReposContainer" class="space-y-4">
+                            <!-- Trending repositories will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Results Section -->
+                    <div id="resultsContainer" class="space-y-4 mt-8 hidden">
+                        <!-- Search results will be inserted here -->
+                    </div>
+
+                    <!-- Loading Spinner -->
+                    <div id="loadingSpinner" class="hidden">
+                        <div class="flex justify-center items-center py-8">
+                            <div class="loading-spinner animate-spin rounded-full h-12 w-12 border-b-2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer mt-auto py-8 bg-white/5 backdrop-blur-sm border-t border-white/10">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center text-white/60">
+                    <p>GitHub Explorer &copy; 2024</p>
+                    <p class="mt-2">Search and discover amazing open source projects and developers</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="components/ui/meteors.js"></script>
+    <script src="config.js"></script>
+    <script src="repositories.js"></script>
+</body>
+</html> 

@@ -1,0 +1,194 @@
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Repository Card Styles */
+.repository-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.repository-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.repository-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.repository-card h3 a {
+    color: #1e40af;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.repository-card h3 a:hover {
+    color: #2563eb;
+}
+
+.repository-card p {
+    color: #1e40af;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.repository-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    border: 2px solid rgba(59, 130, 246, 0.2);
+    border-top: 2px solid #3b82f6;
+}
+
+/* Error Message */
+.error-message {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+/* Button Glow Effect */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: var(--y, 50%);
+    left: var(--x, 50%);
+    transform: translate(-50%, -50%) scale(0);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle closest-side, rgba(255, 255, 255, 0.2), transparent);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.btn-primary:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+/* Meteors Background */
+#meteorsContainer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    z-index: 0;
+}
+
+.meteor {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    opacity: 0;
+    transform: rotate(-115deg)translate(0, 0);
+    animation: meteor linear infinite;
+    filter: drop-shadow(0 0 2px #fff);
+}
+
+@keyframes meteor {
+    0% {
+        opacity: 1;
+        transform: rotate(-45deg) translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(-45deg) translateX(-100vw);
+    }
+}
+
+/* Form Input Focus States */
+.search-input:focus,
+select:focus {
+    outline: none;
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+/* Form Styles */
+.search-input, select {
+    color: #1e40af !important;
+    font-weight: 500;
+}
+
+.search-input::placeholder {
+    color: rgba(30, 64, 175, 0.6);
+}
+
+select option {
+    background-color: #1e293b;
+    color: #1e40af;
+}
+
+/* User Card Styles */
+.user-card h3 a {
+    color: #1e40af;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.user-card h3 a:hover {
+    color: #2563eb;
+}
+
+.user-card p {
+    color: #1e40af;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+/* Section Headers */
+h2.text-blue-900 {
+    color: #1e40af;
+    text-shadow: 0 0 20px rgba(30, 64, 175, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .grid-cols-3 {
+        grid-template-columns: 1fr;
+    }
+    
+    .flex-wrap {
+        flex-direction: column;
+    }
+    
+    .gap-4 > * {
+        width: 100%;
+    }
+} 
