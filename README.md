@@ -1,103 +1,105 @@
-# GitHub Search Enhanced
+# 🚀 GitHub Explorer
 
-A modern web application that enhances GitHub repository search with advanced filtering and sorting capabilities.
+<div align="center">
+  <img src="https://github.com/SilentMaverick.png" alt="@SilentMaverick" width="100" style="border-radius: 50%;" />
+  <h3>Created by <a href="https://github.com/SilentMaverick">@SilentMaverick</a></h3>
+  
+  ![GitHub stars](https://img.shields.io/github/stars/SilentMaverick/github-search-enhanced?style=social)
+  ![GitHub forks](https://img.shields.io/github/forks/SilentMaverick/github-search-enhanced?style=social)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+</div>
 
-## Features
+## 🌟 Overview
 
-- Search GitHub repositories with real-time results
-- Advanced filtering options (stars, forks, language)
-- Custom sorting capabilities
-- Modern, responsive UI with dark mode support
-- Fast and efficient API with caching
+GitHub Explorer is a modern, interactive web application that allows you to discover and explore GitHub repositories and users with style. Built with a beautiful dark theme and glass-morphism design, it provides a seamless experience for searching through GitHub's vast ecosystem.
 
-## Tech Stack
+### ✨ Key Features
 
-- Frontend:
-  - React with TypeScript
-  - Tailwind CSS for styling
-  - React Query for data fetching
-  - Heroicons for icons
-- Backend:
-  - FastAPI (Python)
-  - GitHub API integration
-  - CORS support
-  - Environment variable configuration
+- 🔍 **Smart Search**
+  - Search repositories and users with real-time results
+  - Filter by programming languages
+  - Sort by various metrics (stars, forks, etc.)
 
-## Prerequisites
+- 🎯 **Trending Repositories**
+  - Discover trending repositories
+  - View popular projects in different languages
+  - Stay updated with the latest GitHub trends
 
-- Node.js (v14 or higher)
-- Python 3.7 or higher
-- GitHub Personal Access Token
+- 👥 **User Explorer**
+  - Find and connect with developers
+  - View user contributions and statistics
+  - Explore user repositories and activities
 
-## Setup
+- 🎨 **Modern UI/UX**
+  - Beautiful glass-morphism design
+  - Responsive layout for all devices
+  - Smooth animations and transitions
+  - Dark theme for comfortable viewing
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd github-search-enhanced
-```
+## 🚀 Getting Started
 
-2. Frontend setup:
-```bash
-# Install dependencies
-npm install
+### Prerequisites
 
-# Start development server
-npm run dev
-```
+- A modern web browser
+- GitHub Personal Access Token (for API access)
 
-3. Backend setup:
-```bash
-# Navigate to backend directory
-cd backend
+### 🔑 Setting Up Your Token
 
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+1. Visit [GitHub Settings > Developer Settings > Personal Access Tokens](https://github.com/settings/tokens)
+2. Click "Generate New Token"
+3. Select the following scopes:
+   - `public_repo`
+   - `read:user`
+   - `user:email`
+4. Copy your token
+5. Paste it in the GitHub Explorer token input
 
-# Install dependencies
-pip install fastapi uvicorn python-dotenv httpx
+## 🛠️ Technical Stack
 
-# Configure environment variables
-cp .env.example .env
-# Edit .env and add your GitHub token
-```
+- 💻 **Frontend**
+  - HTML5
+  - TailwindCSS
+  - Vanilla JavaScript
+  - Glass-morphism UI
 
-4. Start the backend server:
-```bash
-# From the backend directory
-python app.py
-```
+- 🔌 **APIs**
+  - GitHub REST API v3
+  - GitHub Search API
 
-## Development
+## 📱 Screenshots
 
-The frontend will be available at http://localhost:5173
-The backend API will be available at http://localhost:8000
+<div align="center">
+  <i>Screenshots coming soon!</i>
+</div>
 
-## Environment Variables
+## 🤝 Contributing
 
-Create a `.env` file in the backend directory with the following:
-
-```
-GITHUB_TOKEN=your_github_personal_access_token
-```
-
-## API Endpoints
-
-- `GET /api/search` - Search repositories
-  - Query parameters:
-    - `q`: Search query
-    - `sort`: Sort field (stars, forks, updated)
-    - `order`: Sort order (asc, desc)
-    - `per_page`: Results per page (max 100)
-    - `page`: Page number
-
-- `GET /api/user/{username}` - Get user details
-
-## Contributing
+Contributions are welcome! Here's how you can help:
 
 1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a new Pull Request 
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- GitHub API for providing the data
+- TailwindCSS for the styling utilities
+- The open-source community for inspiration
+
+## 📬 Contact
+
+Created by [@SilentMaverick](https://github.com/SilentMaverick) - feel free to contact me!
+
+---
+
+<div align="center">
+  Made with ❤️ by <a href="https://github.com/SilentMaverick">@SilentMaverick</a>
+  
+  ⭐️ Star this project if you find it useful!
+</div> 
