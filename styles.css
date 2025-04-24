@@ -20,14 +20,15 @@
 .repository-card {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
-    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
     padding: 1.5rem;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .repository-card:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
 }
 
@@ -106,7 +107,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    pointer-events: none;
     z-index: 0;
 }
 
@@ -114,22 +115,30 @@
     position: absolute;
     width: 2px;
     height: 2px;
-    background: #fff;
+    background: white;
     opacity: 0;
-    transform: rotate(-115deg)translate(0, 0);
-    animation: meteor linear infinite;
-    filter: drop-shadow(0 0 2px #fff);
+    transform: rotate(-45deg);
+    animation: meteor linear;
 }
 
 @keyframes meteor {
     0% {
         opacity: 1;
-        transform: rotate(-45deg) translateX(0);
+        transform: translate(0, 0) rotate(-45deg) scale(1);
     }
     100% {
         opacity: 0;
-        transform: rotate(-45deg) translateX(-100vw);
+        transform: translate(-100px, 100px) rotate(-45deg) scale(0.2);
     }
+}
+
+.meteor::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, white, transparent);
+    transform: translateX(-50px) translateY(0px);
 }
 
 /* Form Input Focus States */
@@ -191,4 +200,81 @@ h2.text-blue-900 {
     .gap-4 > * {
         width: 100%;
     }
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.save-button {
+    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.save-button:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.remove-button {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.remove-button:hover {
+    background: rgba(239, 68, 68, 0.2);
+    transform: translateY(-1px);
+}
+
+.notification {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    font-weight: 500;
+    z-index: 50;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.saved-section {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.saved-section.hidden {
+    display: none;
+    opacity: 0;
 } 

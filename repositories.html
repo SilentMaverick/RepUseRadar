@@ -5,7 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GitHub Explorer - Repositories</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 8px;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
+        input, select {
+            background: rgba(0, 0, 0, 0.3) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: white !important;
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.3) !important;
+        }
+
+        .loader {
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top: 3px solid #3498db;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body class="bg-black text-white min-h-screen">
     <!-- Background Container -->
@@ -17,7 +70,7 @@
                 <div class="flex justify-between items-center py-4">
                     <a href="index.html" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">GitHub Explorer</a>
                     <div class="space-x-4">
-                        <a href="repositories.html" class="text-white font-medium border-b-2 border-blue-500">Repositories</a>
+                        <a href="repositories.html" class="text-blue-400 hover:text-blue-300">Repositories</a>
                         <a href="users.html" class="text-white/60 hover:text-white transition-colors">Users</a>
                     </div>
                 </div>
@@ -26,66 +79,61 @@
 
         <main class="flex-1">
             <div class="container mx-auto px-4 py-8">
-                <div class="max-w-4xl mx-auto">
-                    <h1 class="text-4xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-                        Search Repositories
-                    </h1>
-                    
-                    <!-- Search Section -->
-                    <div class="search-container backdrop-blur-sm bg-white/5 p-6">
-                        <form id="searchForm" class="space-y-6">
-                            <div class="relative">
-                                <input type="text" id="searchInput" 
-                                    class="search-input w-full pl-10 pr-4 py-3 rounded-lg bg-black/50 border border-white/10"
-                                    placeholder="Search repositories...">
-                                <svg class="w-6 h-6 text-gray-400 absolute left-3 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
-                            </div>
-
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <select id="languageFilter" class="bg-black/50 border border-white/10 text-white rounded-lg px-4 py-2">
-                                    <option value="">Any Language</option>
-                                    <option value="javascript">JavaScript</option>
-                                    <option value="python">Python</option>
-                                    <option value="java">Java</option>
-                                    <option value="typescript">TypeScript</option>
-                                    <option value="cpp">C++</option>
-                                    <option value="go">Go</option>
-                                    <option value="rust">Rust</option>
-                                </select>
-
-                                <select id="sortFilter" class="bg-black/50 border border-white/10 text-white rounded-lg px-4 py-2">
-                                    <option value="stars">Sort by Stars</option>
-                                    <option value="forks">Sort by Forks</option>
-                                    <option value="updated">Sort by Updated</option>
-                                </select>
-
-                                <button type="submit" class="btn-primary px-6 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300" data-glow>
-                                    Search
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Trending Repositories -->
-                    <div class="mt-12 trending-section">
-                        <h2 class="text-2xl font-bold mb-4 text-white">Trending Repositories</h2>
-                        <div id="trendingReposContainer" class="space-y-4">
-                            <!-- Trending repositories will be inserted here -->
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">Search Repositories</h1>
+                    <form id="searchForm" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <input type="text" id="searchInput" placeholder="Search repositories..." class="glass-card p-2 rounded-lg w-full">
+                            <select id="languageFilter" class="glass-card p-2 rounded-lg">
+                                <option value="">All Languages</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="python">Python</option>
+                                <option value="java">Java</option>
+                                <option value="cpp">C++</option>
+                                <option value="typescript">TypeScript</option>
+                                <option value="go">Go</option>
+                                <option value="rust">Rust</option>
+                            </select>
+                            <select id="sortFilter" class="glass-card p-2 rounded-lg">
+                                <option value="stars">Sort by Stars</option>
+                                <option value="forks">Sort by Forks</option>
+                                <option value="updated">Sort by Updated</option>
+                            </select>
                         </div>
-                    </div>
+                    </form>
+                </div>
 
-                    <!-- Results Section -->
-                    <div id="resultsContainer" class="space-y-4 mt-8 hidden">
-                        <!-- Search results will be inserted here -->
+                <div class="saved-section max-w-4xl mx-auto mb-12">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-500">
+                            Saved Repositories
+                        </h2>
+                        <button id="clearSaved" class="crazy-button bg-gradient-to-r from-red-500 to-pink-500">
+                            Clear All
+                        </button>
                     </div>
+                    <div id="savedReposContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Saved repository cards will be inserted here -->
+                    </div>
+                    <div id="noSavedRepos" class="text-center text-white/60 py-8 hidden">
+                        No saved repositories yet. Click the star icon on any repository to save it!
+                    </div>
+                </div>
 
-                    <!-- Loading Spinner -->
-                    <div id="loadingSpinner" class="hidden">
-                        <div class="flex justify-center items-center py-8">
-                            <div class="loading-spinner animate-spin rounded-full h-12 w-12 border-b-2"></div>
-                        </div>
+                <div id="resultsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 hidden">
+                    <!-- Search results will be displayed here -->
+                </div>
+
+                <div id="loadingSpinner" class="hidden">
+                    <div class="loader"></div>
+                </div>
+
+                <div class="trending-section max-w-4xl mx-auto mt-12">
+                    <h2 class="text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+                        Trending Repositories
+                    </h2>
+                    <div id="trendingReposContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Trending repositories will be displayed here -->
                     </div>
                 </div>
             </div>
@@ -96,7 +144,7 @@
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto text-center text-white/60">
                     <p>GitHub Explorer &copy; 2024</p>
-                    <p class="mt-2">Search and discover amazing open source projects and developers</p>
+                    <p class="mt-2">Search and discover amazing open source projects</p>
                 </div>
             </div>
         </footer>
